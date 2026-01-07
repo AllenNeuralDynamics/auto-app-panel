@@ -9,6 +9,7 @@ Automatically generate a valid `app-panel.json` from an argument parser defined 
 
 - [ ] support classes defined inside functions or conditionals
 - [ ] preserve groups and other formatting in existing app panel
+- [ ] create explicit string/number/integer Parameter classes to support additional constraints (e.g. min/max length for strings, regex validators etc.) - see codeocean sdk for full schema
 
 ## Installation
 
