@@ -1,6 +1,6 @@
 [project]
 name = "auto-app-panel"
-version = "0.1.2"
+version = "0.1.3"
 description = "Automatically generate a Code Ocean App Panel from an argument parser defined in code."
 readme = "README.md"
 authors = [
