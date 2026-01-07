@@ -5,8 +5,8 @@ import importlib.util
 import inspect
 import pathlib
 import sys
-import typing
 import types
+import typing
 from typing import Any, Literal
 
 import pydantic_core
@@ -26,7 +26,7 @@ def _load_module_from_file(file_path: str) -> types.ModuleType:
 
     module = importlib.util.module_from_spec(spec)
     sys.modules["_temp_module"] = module
-    
+
     module_dir = str(module_path.parent)
     if module_dir not in sys.path:
         sys.path.insert(0, module_dir)
@@ -36,7 +36,7 @@ def _load_module_from_file(file_path: str) -> types.ModuleType:
             sys.path.remove(module_dir)
     else:
         spec.loader.exec_module(module)
-    
+
     return module
 
 
