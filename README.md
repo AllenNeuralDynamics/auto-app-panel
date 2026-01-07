@@ -2,6 +2,15 @@
 
 Automatically generate a valid `app-panel.json` from an argument parser defined in code in a Code Ocean capsule.
 
+[![PyPI](https://img.shields.io/pypi/v/auto-app-panel.svg?label=PyPI&color=blue)](https://pypi.org/project/auto-app-panel/)
+[![Python version](https://img.shields.io/pypi/pyversions/auto-app-panel)](https://pypi.org/project/auto-app-panel/)
+
+[![Coverage](https://img.shields.io/badge/coverage-75%25-yellow?logo=codecov)](https://app.codecov.io/github/AllenNeuralDynamics/auto-app-panel)
+[![mypy](https://img.shields.io/badge/mypy-strict-blue)](https://mypy-lang.org/)
+[![CI/CD](https://img.shields.io/github/actions/workflow/status/AllenNeuralDynamics/auto-app-panel/publish.yml?label=CI/CD&logo=github)](https://github.com/AllenNeuralDynamics/auto-app-panel/actions/workflows/publish.yaml)
+[![GitHub issues](https://img.shields.io/github/issues/AllenNeuralDynamics/auto-app-panel?logo=github)](https://github.com/AllenNeuralDynamics/auto-app-panel/issues)
+
+
 ## Status
 - Initial release supporting extraction from `pydantic_settings.BaseSettings` and `argparse.ArgumentParser` classes at top-level of a specified Python file.
 
