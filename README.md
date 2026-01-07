@@ -1,6 +1,6 @@
 # auto-app-panel
 
-Automatically generate a valid `app-panel.json` from an argument parser defined in code in a Code Ocean capsule.
+Automatically generate a Code Ocean App Panel from an argument parser defined in code.
 
 [![PyPI](https://img.shields.io/pypi/v/auto-app-panel.svg?label=PyPI&color=blue)](https://pypi.org/project/auto-app-panel/)
 [![Python version](https://img.shields.io/pypi/pyversions/auto-app-panel)](https://pypi.org/project/auto-app-panel/)
