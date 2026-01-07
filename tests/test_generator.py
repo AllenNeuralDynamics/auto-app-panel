@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from pathlib import Path
 
 from auto_app_panel.extractors import PydanticSettingsExtractor

@@ -1,9 +1,12 @@
+from __future__ import annotations
+
 import datetime
 import json
 import pathlib
 import random
 import string
-from typing import Iterable, Literal
+from collections.abc import Iterable
+from typing import Literal
 
 import pydantic
 

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import argparse
 import importlib.util
 import inspect
@@ -17,8 +19,8 @@ def _extract_type_from_annotation(annotation: Any) -> type | None:
     if origin is not None:
         args = typing.get_args(annotation)
         if len(args) > 0:
-            return args[0]  # type: ignore[no-any-return]
-    return annotation  # type: ignore[no-any-return]
+            return args[0]  # type: ignore[no-any-return, unused-ignore]
+    return annotation  # type: ignore[no-any-return, unused-ignore]
 
 
 def _python_type_to_app_panel_type(
