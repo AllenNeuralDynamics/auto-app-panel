@@ -8,7 +8,7 @@ from auto_app_panel.extractors import ArgparseExtractor, PydanticSettingsExtract
 from auto_app_panel.types import Parameter
 
 
-def test_argparse_extractor():
+def test_argparse_extractor() -> None:
     extractor = ArgparseExtractor()
     example_path = pathlib.Path(__file__).parent / "resources" / "argparse_example.py"
     parameters = extractor.extract_parameters(str(example_path))
@@ -32,7 +32,7 @@ def test_argparse_extractor():
     assert default_qc_only.default_value == "1"
 
 
-def test_pydantic_settings_extractor():
+def test_pydantic_settings_extractor() -> None:
     extractor = PydanticSettingsExtractor()
     example_path = (
         pathlib.Path(__file__).parent / "resources" / "pydantic_settings_example.py"
@@ -66,8 +66,14 @@ def test_pydantic_settings_extractor():
     assert max_workers.type == "integer"
     assert max_workers.default_value is None
 
+    area_list = next(p for p in parameters if p.name == "areas_to_process")
+    assert area_list.type == "string"
+    assert area_list.default_value is not None
+    assert 'MOs' in area_list.default_value
+    assert "\'" not in area_list.default_value and '\"' not in area_list.default_value
 
-def test_argparse_extractor_rejects_bool_type(tmp_path):
+
+def test_argparse_extractor_rejects_bool_type(tmp_path) -> None:
     extractor = ArgparseExtractor()
     example_path = tmp_path / "bool_type_test.py"
 
@@ -86,7 +92,7 @@ parser.add_argument("--test-field", type=bool, default=True)
         extractor.extract_parameters(str(example_path))
 
 
-def test_argparse_extractor_rejects_flag_actions(tmp_path):
+def test_argparse_extractor_rejects_flag_actions(tmp_path) -> None:
     extractor = ArgparseExtractor()
 
     test_cases = [

@@ -105,7 +105,15 @@ class PydanticSettingsExtractor:
                 hasattr(field_info, "default_factory")
                 and field_info.default_factory is not None
             ):
-                default_value = str(field_info.default_factory())  # type: ignore[call-arg]
+                factory_result = field_info.default_factory()  # type: ignore[call-arg]
+                if (
+                    isinstance(factory_result, (list, tuple))
+                    and isinstance(factory_result[0], str)
+                ):
+                    # app panel default value should not contain quotes around strings
+                    default_value = ", ".join(str(item) for item in factory_result)
+                else:
+                    default_value = str(factory_result)
 
             description = field_info.description
 
