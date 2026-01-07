@@ -20,12 +20,22 @@ Automatically generate a valid `app-panel.json` from an argument parser defined 
 - [ ] preserve groups and other formatting in existing app panel
 - [ ] create explicit string/number/integer Parameter classes to support additional constraints (e.g. min/max length for strings, regex validators etc.) - see codeocean sdk for full schema
 
-## Installation
-
-Add `auto-app-panel` as a Python dependency in your Code Ocean capsule.
 
 ## Usage
 
+### Typical Workflow
+
+1. Develop your code with a class for parsing capsule parameters **at the top-level of the file** (not inside a function or conditional)
+2. Run the tool in a Code Ocean cloud workstation terminal, pointing to the file containing the parameter-parsing class:
+   ```bash
+   pip install auto-app-panel
+   auto-app-panel /root/capsule/code/run.py
+   ```
+   This generates `/root/capsule/.codeocean/app-panel.json`, which configures the capsule's App Panel GUI.
+3. Re-run the tool when you add/modify parameters (use `--strategy preserve` to keep any edits made in the App Panel GUI/in an existing `app-panel.json`)
+4. Verify that the App Panel is visible and has all expected fields when you exit the cloud workstation
+
+### Command Line Interface
 ```bash
 auto-app-panel SOURCE [OUTPUT] [OPTIONS]
 ```
@@ -40,7 +50,7 @@ auto-app-panel SOURCE [OUTPUT] [OPTIONS]
   - `preserve`: Keeps all existing values, only adds new parameters
 - `--no-backup` - Skip creating timestamped backup of existing file
 
-### Example
+### Example files
 
 **Input Python file (`run.py`):**
 
@@ -80,7 +90,7 @@ class Params(pydantic_settings.BaseSettings):
 
 **Generate file at standard path:**
 ```bash
-auto-app-panel /root/capsule/code/run.py --strategy overwrite --no-backup
+auto-app-panel /root/capsule/code/run.py
 ```
 **Generated `app-panel.json`:**
 
@@ -130,19 +140,7 @@ auto-app-panel /root/capsule/code/run.py --strategy overwrite --no-backup
     ]
 }
 ```
-
-## Typical Workflow
-
-1. Develop your code with a class for parsing capsule parameters **at the top-level of the file** (not inside a function or conditional)
-2. Run the tool in a Code Ocean cloud workstation terminal:
-   ```bash
-   auto-app-panel /root/capsule/code/run.py
-   ```
-3. Manually customize descriptions or add constraints as needed
-4. Re-run the tool when you add/modify parameters (use `--strategy preserve` to keep customizations)
-5. Verify that the App Panel is visible and has all expected fields when you exit the cloud workstation
-
-# Development
+## Development
 Clone the repository and setup with `uv sync`.
 
 Run tests with `uv run task test`.
