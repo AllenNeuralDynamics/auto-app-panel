@@ -7,7 +7,7 @@ Automatically generate a Code Ocean App Panel from an argument parser defined in
 
 [![Coverage](https://img.shields.io/badge/coverage-75%25-yellow?logo=codecov)](https://app.codecov.io/github/AllenNeuralDynamics/auto-app-panel)
 [![mypy](https://img.shields.io/badge/mypy-strict-blue)](https://mypy-lang.org/)
-[![CI/CD](https://img.shields.io/github/actions/workflow/status/AllenNeuralDynamics/auto-app-panel/publish.yml?label=CI/CD&logo=github)](https://github.com/AllenNeuralDynamics/auto-app-panel/actions/workflows/publish.yaml)
+[![CI/CD](https://img.shields.io/github/actions/workflow/status/AllenNeuralDynamics/auto-app-panel/publish.yaml?label=CI/CD&logo=github)](https://github.com/AllenNeuralDynamics/auto-app-panel/actions/workflows/publish.yaml)
 [![GitHub issues](https://img.shields.io/github/issues/AllenNeuralDynamics/auto-app-panel?logo=github)](https://github.com/AllenNeuralDynamics/auto-app-panel/issues)
 
 
