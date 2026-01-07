@@ -1,13 +1,7 @@
-import datetime
-import zoneinfo
+import time
 
-import dateutil
 import pydantic
 import pydantic_settings
-import upath
-
-ROOT_DIR = upath.UPath("s3://aind-scratch-data/dynamic-routing/psths")
-
 
 class Params(pydantic_settings.BaseSettings):
     override_date: str | None = pydantic.Field(
@@ -29,19 +23,9 @@ class Params(pydantic_settings.BaseSettings):
     areas_to_process: list[str] | None = pydantic.Field(
         default_factory=lambda: ["MOs", "MRN"], exclude=True
     )
-    _start_date: datetime.date = pydantic.PrivateAttr(
-        datetime.datetime.now(zoneinfo.ZoneInfo("US/Pacific")).date()
-    )
-
-    def model_post_init(self, __context) -> None:
-        if self.override_date:
-            self._start_date = dateutil.parser.parse(self.override_date).date()
+    _start_time: float = pydantic.PrivateAttr(time.time())
 
     # --------------------------------
-
-    @property
-    def dir_path(self) -> upath.UPath:
-        return ROOT_DIR / f"{self._start_date}"
 
     @pydantic.computed_field
     @property
