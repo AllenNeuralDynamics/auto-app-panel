@@ -5,6 +5,7 @@ import time
 import pydantic
 import pydantic_settings
 
+import no_parser # not needed, but tests tool's compatibility with local imports
 
 class Params(pydantic_settings.BaseSettings):
     override_date: str | None = pydantic.Field(

@@ -6,12 +6,38 @@ import inspect
 import pathlib
 import sys
 import typing
+import types
 from typing import Any, Literal
 
 import pydantic_core
 import pydantic_settings
 
 from .types import Parameter
+
+
+def _load_module_from_file(file_path: str) -> types.ModuleType:
+    module_path = pathlib.Path(file_path).resolve()
+    if not module_path.exists():
+        raise FileNotFoundError(f"File not found: {file_path}")
+
+    spec = importlib.util.spec_from_file_location("_temp_module", module_path)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"Cannot load module from {file_path}")
+
+    module = importlib.util.module_from_spec(spec)
+    sys.modules["_temp_module"] = module
+    
+    module_dir = str(module_path.parent)
+    if module_dir not in sys.path:
+        sys.path.insert(0, module_dir)
+        try:
+            spec.loader.exec_module(module)
+        finally:
+            sys.path.remove(module_dir)
+    else:
+        spec.loader.exec_module(module)
+    
+    return module
 
 
 def _extract_type_from_annotation(annotation: Any) -> type | None:
@@ -37,17 +63,7 @@ def _python_type_to_app_panel_type(
 
 class PydanticSettingsExtractor:
     def extract_parameters(self, file_path: str) -> tuple[Parameter, ...]:
-        module_path = pathlib.Path(file_path).resolve()
-        if not module_path.exists():
-            raise FileNotFoundError(f"File not found: {file_path}")
-
-        spec = importlib.util.spec_from_file_location("_temp_module", module_path)
-        if spec is None or spec.loader is None:
-            raise ImportError(f"Cannot load module from {file_path}")
-
-        module = importlib.util.module_from_spec(spec)
-        sys.modules["_temp_module"] = module
-        spec.loader.exec_module(module)
+        module = _load_module_from_file(file_path)
 
         settings_classes = []
         for name, obj in inspect.getmembers(module, inspect.isclass):
@@ -107,17 +123,7 @@ class PydanticSettingsExtractor:
 
 class ArgparseExtractor:
     def extract_parameters(self, file_path: str) -> tuple[Parameter, ...]:
-        module_path = pathlib.Path(file_path).resolve()
-        if not module_path.exists():
-            raise FileNotFoundError(f"File not found: {file_path}")
-
-        spec = importlib.util.spec_from_file_location("_temp_module", module_path)
-        if spec is None or spec.loader is None:
-            raise ImportError(f"Cannot load module from {file_path}")
-
-        module = importlib.util.module_from_spec(spec)
-        sys.modules["_temp_module"] = module
-        spec.loader.exec_module(module)
+        module = _load_module_from_file(file_path)
 
         parsers = []
         for name, obj in inspect.getmembers(module):
