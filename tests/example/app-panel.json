@@ -1,0 +1,131 @@
+{
+	"version": 1,
+	"named_parameters": true,
+	"parameters": [
+		{
+			"id": "KUnvcsulVqAlJ1rC",
+			"name": "override_date",
+			"param_name": "override_date",
+			"description": "today's date is encoded in data folder: add to a previous folder by specifying it here (yyyy-mm-dd)",
+			"help_text": "today's date is encoded in data folder: add to a previous folder by specifying it here (yyyy-mm-dd)",
+			"type": "text",
+			"value_type": "string"
+		},
+		{
+			"id": "6POYiQDEvzIVz9hS",
+			"name": "max_workers",
+			"param_name": "max_workers",
+			"description": "Use 0 for maximum available (CO_CPUS)",
+			"help_text": "Use 0 for maximum available (CO_CPUS)",
+			"type": "text",
+			"value_type": "integer",
+			"default_value": "6"
+		},
+		{
+			"id": "8pCUUu8MLV34v7yt",
+			"name": "skip_existing",
+			"param_name": "skip_existing",
+			"type": "text",
+			"value_type": "integer",
+			"default_value": "1",
+			"minimum": 0,
+			"maximum": 1
+		},
+		{
+			"id": "7any1TAR5nwy12pj",
+			"name": "intervals_table",
+			"param_name": "intervals_table",
+			"description": "eg trials or /intervals/optotagging_trials",
+			"help_text": "eg trials or /intervals/optotagging_trials",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "trials"
+		},
+		{
+			"id": "2zPL91cGcSTRfH",
+			"name": "default_qc_only",
+			"param_name": "default_qc_only",
+			"description": "only use units with default_qc == True",
+			"type": "text",
+			"value_type": "integer",
+			"default_value": "1",
+			"minimum": 0,
+			"maximum": 1
+		},
+		{
+			"id": "gRSgqAsyqXsP70",
+			"name": "align_to_col",
+			"param_name": "align_to_col",
+			"description": "column in trials table to align PSTHs to (pre and post will determine total window)  ",
+			"type": "text",
+			"value_type": "string",
+			"default_value": "stim_start_time"
+		},
+		{
+			"id": "G5uo58GeJx5XP0",
+			"name": "pre",
+			"param_name": "pre",
+			"description": "length of time, in seconds, to capture before the event in `align_to`",
+			"help_text": "length of time, in seconds, to capture before the event in `align_to`",
+			"type": "text",
+			"value_type": "number",
+			"default_value": "0.5"
+		},
+		{
+			"id": "lUkjLWFrvTpsKz",
+			"name": "post",
+			"param_name": "post",
+			"description": "length of time, in seconds, to capture after the event in `align_to`",
+			"help_text": "length of time, in seconds, to capture after the event in `align_to`",
+			"type": "text",
+			"value_type": "number",
+			"default_value": "0.5"
+		},
+		{
+			"id": "olwZn4tfNPIR3r",
+			"name": "as_spike_count",
+			"param_name": "as_spike_count",
+			"description": "save number of spikes in [pre:post] window",
+			"help_text": "save number of spikes in [pre:post] window",
+			"type": "text",
+			"value_type": "integer",
+			"default_value": "0",
+			"minimum": 0,
+			"maximum": 1
+		},
+		{
+			"id": "tZn92uq0JTZSAQ",
+			"name": "as_binarized_array",
+			"param_name": "as_binarized_array",
+			"description": "save presence/absence of spikes in bins, rather than spike times",
+			"help_text": "save presence/absence of spikes in bins, rather than spike times",
+			"type": "text",
+			"value_type": "integer",
+			"default_value": "1",
+			"minimum": 0,
+			"maximum": 1
+		},
+		{
+			"id": "LtYODpeQgvOHLQ",
+			"name": "bin_size_s",
+			"param_name": "bin_size_s",
+			"description": "bin size for binarized_array (has no effect if as_binarized_array == False)",
+			"help_text": "bin size for binarized_array (has no effect if as_binarized_array == False)",
+			"type": "text",
+			"value_type": "number",
+			"default_value": "0.001"
+		},
+		{
+			"id": "ralWUtYfV0rzH8gK",
+			"name": "largest_to_smallest",
+			"param_name": "largest_to_smallest",
+			"description": "Reverse processing order (default is smallest -\u003e largest areas)",
+			"help_text": "Reverse processing order (default is smallest -\u003e largest areas)",
+			"type": "text",
+			"value_type": "integer",
+			"default_value": "0",
+			"minimum": 0,
+			"maximum": 1
+		}
+	]
+}

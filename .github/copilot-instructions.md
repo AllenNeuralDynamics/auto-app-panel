@@ -1,0 +1,10 @@
+- do not add comments explaining code
+- use type hints throughout with 3.10+ syntax: 
+  - lowercase containers (list[int]) 
+  - pipe operator | instead of Union
+  - str | None instead of Optional[str]
+- use f-strings for string interpolation
+- use pathlib or upath for file paths instead of os.path
+- use pydantic BaseSettings for configuration
+- use dataclasses instead of untyped dicts
+- create basic tests for all public functions using pytest
