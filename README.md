@@ -141,3 +141,11 @@ auto-app-panel /root/capsule/code/run.py --strategy overwrite --no-backup
 3. Manually customize descriptions or add constraints as needed
 4. Re-run the tool when you add/modify parameters (use `--strategy preserve` to keep customizations)
 5. Verify that the App Panel is visible and has all expected fields when you exit the cloud workstation
+
+# Development
+Clone the repository and setup with `uv sync`.
+
+Run tests with `uv run task test`.
+
+Pushing to `main` or creating a PR to `main` will trigger CI/CD. Updates on `main` that pass all tests
+will trigger a minor version bump, then be published on PyPI.
