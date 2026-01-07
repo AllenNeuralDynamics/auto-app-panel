@@ -1,4 +1,4 @@
-from pathlib import Path
+import pathlib
 from typing import Annotated, Literal
 
 import typer
@@ -14,17 +14,17 @@ app = typer.Typer(help="Generate app-panel.json from Python argument parsing cla
 @app.command()
 def generate(
     source: Annotated[
-        Path,
+        pathlib.Path,
         typer.Argument(
             help="Path to Python file containing argument parsing class",
         ),
     ],
     output: Annotated[
-        Path,
+        pathlib.Path,
         typer.Argument(
             help="Path where App Panel JSON will be written",
         ),
-    ] = Path("/root/capsule/.codeocean/app-panel.json"),
+    ] = pathlib.Path("/root/capsule/.codeocean/app-panel.json"),
     strategy: Annotated[
         Literal["overwrite", "preserve"],
         typer.Option(
@@ -40,7 +40,7 @@ def generate(
 ) -> None:
     parser_type = detect_arg_parser_type(str(source))
 
-    extractor: ParameterExtractor # set the expectation for type checkers 
+    extractor: ParameterExtractor  # set the expectation for type checkers
     if parser_type == "argparse":
         extractor = ArgparseExtractor()
     elif parser_type == "pydantic_settings":

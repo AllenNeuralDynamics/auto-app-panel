@@ -6,10 +6,9 @@ import pydantic
 class Parameter(pydantic.BaseModel):
     name: str
     type: Literal["string", "integer", "number"]
-    default_value: str | float | int | None = None
+    default_value: str | None = None
     description: str | None = None
 
 
 class ParameterExtractor(Protocol):
-    def extract_parameters(self, file_path: str) -> list[Parameter]:
-        ...
+    def extract_parameters(self, file_path: str) -> tuple[Parameter, ...]: ...

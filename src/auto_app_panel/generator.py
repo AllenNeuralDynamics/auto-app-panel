@@ -3,7 +3,7 @@ import json
 import pathlib
 import random
 import string
-from typing import Literal
+from typing import Iterable, Literal
 
 import pydantic
 
@@ -26,7 +26,7 @@ class AppPanelParameter(pydantic.BaseModel):
 class AppPanel(pydantic.BaseModel):
     version: int = 1
     named_parameters: bool = True
-    parameters: list[AppPanelParameter]
+    parameters: tuple[AppPanelParameter, ...]
 
 
 def _generate_random_id(length: int = 16) -> str:
@@ -44,7 +44,7 @@ def _parameter_to_app_panel(
         description=param.description,
         help_text=param.description,
         value_type=param.type,
-        default_value=str(param.default_value) if param.default_value is not None else None,
+        default_value=param.default_value,
     )
 
     if param.type == "integer" and param.default_value in ["True", "False"]:
@@ -57,13 +57,13 @@ def _parameter_to_app_panel(
 
 
 def _merge_app_panels(
-    parameters: list[Parameter],
+    parameters: Iterable[Parameter],
     existing: AppPanel | None,
     strategy: Literal["overwrite", "preserve"],
 ) -> AppPanel:
     if existing is None:
         return AppPanel(
-            parameters=[_parameter_to_app_panel(param) for param in parameters]
+            parameters=tuple(_parameter_to_app_panel(param) for param in parameters)
         )
 
     existing_by_name = {p.param_name: p for p in existing.parameters}
@@ -89,11 +89,11 @@ def _merge_app_panels(
         else:
             merged_params.append(_parameter_to_app_panel(param))
 
-    return AppPanel(parameters=merged_params)
+    return AppPanel(parameters=tuple(merged_params))
 
 
 def generate_app_panel(
-    parameters: list[Parameter],
+    parameters: Iterable[Parameter],
     output_path: str | pathlib.Path,
     strategy: Literal["overwrite", "preserve"] = "preserve",
     backup: bool = True,

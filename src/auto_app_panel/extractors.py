@@ -34,7 +34,7 @@ def _python_type_to_app_panel_type(
 
 
 class PydanticSettingsExtractor:
-    def extract_parameters(self, file_path: str) -> list[Parameter]:
+    def extract_parameters(self, file_path: str) -> tuple[Parameter, ...]:
         module_path = pathlib.Path(file_path).resolve()
         if not module_path.exists():
             raise FileNotFoundError(f"File not found: {file_path}")
@@ -100,11 +100,11 @@ class PydanticSettingsExtractor:
                 )
             )
 
-        return parameters
+        return tuple(parameters)
 
 
 class ArgparseExtractor:
-    def extract_parameters(self, file_path: str) -> list[Parameter]:
+    def extract_parameters(self, file_path: str) -> tuple[Parameter, ...]:
         module_path = pathlib.Path(file_path).resolve()
         if not module_path.exists():
             raise FileNotFoundError(f"File not found: {file_path}")
@@ -177,4 +177,4 @@ class ArgparseExtractor:
                 )
             )
 
-        return parameters
+        return tuple(parameters)
