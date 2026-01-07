@@ -17,8 +17,8 @@ def _extract_type_from_annotation(annotation: Any) -> type | None:
     if origin is not None:
         args = typing.get_args(annotation)
         if len(args) > 0:
-            return args[0]
-    return annotation
+            return args[0]  # type: ignore[no-any-return]
+    return annotation  # type: ignore[no-any-return]
 
 
 def _python_type_to_app_panel_type(
